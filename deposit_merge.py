@@ -1,11 +1,12 @@
 import os
 import openpyxl
+from openpyxl.styles import Font
 
 
 def stringToRowName(stringData):
-    if stringData == 'Count':
+    if stringData == 'Users':
         return "C"
-    elif stringData == 'Amount':
+    elif stringData == 'Count':
         return "D"
     else:
         return "E"
@@ -21,7 +22,7 @@ def fill_value(j, k, current_excel, sheet):
 
 def deposit_merge():
     workbook = openpyxl.load_workbook('summary.xlsx')
-    sheet = workbook.worksheets[0]
+    sheet = workbook["by currency"]
     path = 'deposit'
     data_excel_list = os.listdir(path)
 
@@ -41,12 +42,23 @@ def deposit_merge():
                     sheet = fill_value(j, k, currentExcel, sheet)
                     break
 
-    for row in range(2, sheet.max_row + 1):
+    font = Font(u'Tahoma', size=8)
+
+    # 將空白補0，數值格式化
+    for row in range(1, sheet.max_row + 1):
         if sheet["C" + str(row)].value is None:
             sheet["C" + str(row)] = 0
         if sheet["D" + str(row)].value is None:
             sheet["D" + str(row)] = 0
         if sheet["E" + str(row)].value is None:
             sheet["E" + str(row)] = 0
+        sheet["C" + str(row)].font = font
+        sheet["D" + str(row)].font = font
+        sheet["E" + str(row)].font = font
+
+        if row != 1:
+            sheet["C" + str(row)].number_format = '#,##'
+            sheet["D" + str(row)].number_format = '#,##'
+            sheet["E" + str(row)].number_format = '#,##0.00'
 
     workbook.save('summary.xlsx')

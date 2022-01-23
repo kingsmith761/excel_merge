@@ -9,4 +9,4 @@ if not os.path.isfile('./summary.xlsx'):
 
 deposit_merge()
 deposit_sum()
-deposit_count()
+# deposit_count()
