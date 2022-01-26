@@ -25,8 +25,8 @@ def deposit_plot():
     fig, ax1 = plt.subplots()
     ax2 = ax1.twinx()
 
-    ax2.plot(day, count_array, color='tab:orange')
-    ax1.bar(day, amount_array, color='blue', alpha=0.7)
+    ax1.plot(day, count_array, color='tab:orange')
+    ax2.bar(day, amount_array, color='blue', alpha=0.7)
     plt.show()
 
 
