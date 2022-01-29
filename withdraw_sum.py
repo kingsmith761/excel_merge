@@ -3,7 +3,7 @@ import openpyxl as op
 from openpyxl.styles import Font
 
 
-def withdraw_sum():
+def withdraw_sum(year, month):
     load_excel = op.load_workbook('summary.xlsx')
     data_sheet = load_excel["by currency withdraw"]
     font = Font(u'Tahoma', size=8)
@@ -78,10 +78,6 @@ def withdraw_sum():
         sheet["C" + str(row)].number_format = '#,##'
         sheet["D" + str(row)].number_format = '#,##0.00'
 
-    print("please insert year: ", end="")
-    year = input()
-    print("please insert month: ", end="")
-    month = input()
     cal = calendar.weekday(int(year), int(month), 1)
 
     if cal >= 2:
