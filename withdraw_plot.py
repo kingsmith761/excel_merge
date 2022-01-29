@@ -4,9 +4,9 @@ from matplotlib import ticker
 from matplotlib.ticker import MultipleLocator
 
 
-def deposit_plot():
+def withdraw_plot():
     load_excel = op.load_workbook('summary.xlsx')
-    sheet = load_excel["deposit"]
+    sheet = load_excel["withdraw"]
     read_user = sheet["B"]
     read_count = sheet["C"]
     read_amount = sheet["D"]
@@ -57,7 +57,7 @@ def deposit_plot():
     plt.xlim(0.5, day[len(day) - 1] + 0.5)
     plt.title('Deposit', fontdict=font)
     fig.legend([ax1_plot, ax2_plot], ["Volume", "Count"], loc='lower center', ncol=2, frameon=False)
-    plt.savefig("deposit-volume-count.png", dpi=300, transparent=True)
+    plt.savefig("withdraw-volume-count.png", dpi=300, transparent=True)
     # plt.show()
     plt.clf()
 
@@ -72,6 +72,6 @@ def deposit_plot():
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y / 1000)))
     plt.xlim(0.5, day[len(day) - 1] + 0.5)
     plt.title('User', fontdict=font)
-    plt.savefig("deposit-user.png", dpi=300, transparent=True)
+    plt.savefig("withdraw-user.png", dpi=300, transparent=True)
     # plt.show()
     plt.clf()

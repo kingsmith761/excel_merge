@@ -42,6 +42,7 @@ def deposit_sum():
         sheet['K15'] = 'Volume'
         sheet['K16'] = '=SUM(D2:D32)'
         sheet['K24'] = '=AVERAGE(D2:D32)'
+
     start = 0
     user = 0
     count = 0
