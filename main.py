@@ -9,6 +9,8 @@ from withdraw_plot import withdraw_plot
 from withdraw_sum import withdraw_sum
 from main_deposit import main_deposit
 from main_deposit_plot import main_deposit_plot
+from other_currency import other_currency
+from other_currency_plot import other_currency_plot
 
 if not os.path.isfile('./summary.xlsx'):
     create_new_workbook()
@@ -25,3 +27,5 @@ withdraw_sum(year, month)
 withdraw_plot()
 main_deposit()
 main_deposit_plot()
+other_currency()
+other_currency_plot()

@@ -42,7 +42,9 @@ def other_currency():
     for i in range(2, data_sheet.max_row + 1):
         pos = data_sheet['A' + str(i)].value
         sheet['A' + str(pos + 2)] = pos
-        sheet['G' + str(pos + 2)] = pos
+        sheet['E' + str(pos + 2)] = pos
+        sheet['I' + str(pos + 2)] = pos
+        sheet['M' + str(pos + 2)] = pos
         if data_sheet['B' + str(i)].value == 'MYR':
             sheet['B' + str(pos + 2)] = data_sheet['D' + str(i)].value
             sheet['C' + str(pos + 2)] = data_sheet['E' + str(i)].value
@@ -85,6 +87,3 @@ def other_currency():
         sheet['O' + str(font_format)].font = font
 
     load_excel.save('summary.xlsx')
-
-
-other_currency()
