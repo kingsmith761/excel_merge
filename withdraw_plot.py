@@ -34,7 +34,8 @@ def withdraw_plot():
     fig, ax1 = plt.subplots()
     ax2 = ax1.twinx()
     font = {'family': 'cambria',
-            'size': 14}
+            'size': 16,
+            'color': 'white'}
 
     ax1_plot = ax1.bar(day, amount_array, color='#4472C4', width=0.6)
     ax1.xaxis.set_major_locator(MultipleLocator(1))
@@ -43,7 +44,13 @@ def withdraw_plot():
     ax1.yaxis.set_label_position('right')
     ax1.set_ylabel('million', fontdict=font, labelpad=10)
     ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.1f}'.format(y / 1000000)))
+    ax1.xaxis.set_tick_params(labelcolor='white')
+    ax1.yaxis.set_tick_params(labelcolor='white')
     ax1.yaxis.set_ticks_position('right')
+    ax1.spines['top'].set_visible(False)
+    ax1.spines['right'].set_visible(False)
+    ax1.spines['bottom'].set_visible(False)
+    ax1.spines['left'].set_visible(False)
 
     ax2_plot, = ax2.plot(day, count_array, color='#ED7D31', linewidth=3, marker='o', markersize=6)
     ax2.xaxis.set_major_locator(MultipleLocator(1))
@@ -52,11 +59,19 @@ def withdraw_plot():
     ax2.yaxis.set_label_position('left')
     ax2.set_ylabel('thousand', fontdict=font, labelpad=10)
     ax2.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y/1000)))
+    ax2.xaxis.set_tick_params(labelcolor='white')
+    ax2.yaxis.set_tick_params(labelcolor='white')
     ax2.yaxis.set_ticks_position('left')
+    ax2.spines['top'].set_visible(False)
+    ax2.spines['right'].set_visible(False)
+    ax2.spines['bottom'].set_visible(False)
+    ax2.spines['left'].set_visible(False)
 
     plt.xlim(0.5, day[len(day) - 1] + 0.5)
     plt.title('Deposit', fontdict=font)
-    fig.legend([ax1_plot, ax2_plot], ["Volume", "Count"], loc='lower center', ncol=2, frameon=False)
+    legend = fig.legend([ax1_plot, ax2_plot], ["Volume", "Count"], loc='lower center', ncol=2, frameon=False)
+    for text in legend.get_texts():
+        text.set_color("white")
     plt.savefig("withdraw-volume-count.png", dpi=300, transparent=True)
     # plt.show()
     plt.clf()
@@ -68,6 +83,12 @@ def withdraw_plot():
     ax.xaxis.set_major_locator(MultipleLocator(1))
     ax.yaxis.set_major_locator(MultipleLocator(500))
     ax.set_ylim(0, (int(max(user_array) / 1000) + 1) * 1000)
+    ax.xaxis.set_tick_params(labelcolor='white')
+    ax.yaxis.set_tick_params(labelcolor='white')
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    ax.spines['left'].set_visible(False)
     plt.ylabel('thousand', fontdict=font, labelpad=10)
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y / 1000)))
     plt.xlim(0.5, day[len(day) - 1] + 0.5)

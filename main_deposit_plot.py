@@ -49,7 +49,8 @@ def main_deposit_plot():
             amount_vnd_array.append(k.value)
 
     font = {'family': 'cambria',
-            'size': 14}
+            'size': 16,
+            'color': 'white'}
 
     plt.rcParams['figure.figsize'] = [9, 4.8]
     count_idr, = plt.plot(day, count_idr_array, color='#A5A5A5', linewidth=3, marker='o', markersize=6)
@@ -61,16 +62,20 @@ def main_deposit_plot():
     count_max = max(max(count_idr_array), max(count_thb_array), max(count_vnd_array))
     ax.set_ylim(0, (int(count_max / 1000) + 1) * 1000)
     ax.yaxis.set_label_position('right')
+    ax.xaxis.set_tick_params(labelcolor='white')
+    ax.yaxis.set_tick_params(labelcolor='white')
     plt.ylabel('thousand', fontdict=font, labelpad=10)
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.1f}'.format(y / 1000)))
     plt.xlim(0.5, day[len(day) - 1] + 0.5)
     plt.title('Main market transaction count', fontdict=font)
-    ax.legend([count_idr, count_thb, count_vnd],
+    legend = ax.legend([count_idr, count_thb, count_vnd],
               ["IDR", "THB", "VND"],
               loc='upper center',
               ncol=3,
               frameon=False,
               bbox_to_anchor=(0.5, -0.06))
+    for text in legend.get_texts():
+        text.set_color("white")
     plt.savefig("main-deposit-count.png", dpi=300, transparent=True)
     # plt.show()
     plt.clf()
@@ -84,16 +89,20 @@ def main_deposit_plot():
     amount_max = max(max(amount_idr_array), max(amount_thb_array), max(amount_vnd_array))
     ax.set_ylim(0, (((int(amount_max)) / 100000) + 1) * 100000)
     ax.yaxis.set_label_position('right')
+    ax.xaxis.set_tick_params(labelcolor='white')
+    ax.yaxis.set_tick_params(labelcolor='white')
     plt.ylabel('thousand', fontdict=font, labelpad=10)
     ax.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.2f}'.format(y / 1000000)))
     plt.xlim(0.5, day[len(day) - 1] + 0.5)
     plt.title('Main market volume', fontdict=font)
-    ax.legend([amount_idr, amount_thb, amount_vnd],
+    legend = ax.legend([amount_idr, amount_thb, amount_vnd],
               ["IDR", "THB", "VND"],
               loc='upper center',
               ncol=3,
               frameon=False,
               bbox_to_anchor=(0.5, -0.06))
+    for text in legend.get_texts():
+        text.set_color("white")
     plt.savefig("main-deposit-amount.png", dpi=300, transparent=True)
     # plt.show()
     plt.clf()

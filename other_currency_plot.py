@@ -9,7 +9,8 @@ def draw_plot(day, count, amount, currency):
     fig, ax1 = plt.subplots()
     ax2 = ax1.twinx()
     font = {'family': 'cambria',
-            'size': 14}
+            'size': 16,
+            'color': 'white'}
 
     if currency == "MYR":
         scale = 100
@@ -36,6 +37,8 @@ def draw_plot(day, count, amount, currency):
     ax1.xaxis.set_major_locator(MultipleLocator(1))
     ax1.yaxis.set_major_locator(MultipleLocator(y_scale_2))
     ax1.set_ylim(0, (int(max(amount) / scale_2) + 1) * scale_2)
+    ax1.xaxis.set_tick_params(labelcolor='white')
+    ax1.yaxis.set_tick_params(labelcolor='white')
     ax1.yaxis.set_label_position('right')
     ax1.set_ylabel('thousand', fontdict=font, labelpad=10)
     ax1.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y / 1000)))
@@ -45,13 +48,17 @@ def draw_plot(day, count, amount, currency):
     ax2.xaxis.set_major_locator(MultipleLocator(1))
     ax2.yaxis.set_major_locator(MultipleLocator(y_scale))
     ax2.set_ylim(0, (int(max(count) / scale) + 1) * scale)
+    ax2.xaxis.set_tick_params(labelcolor='white')
+    ax2.yaxis.set_tick_params(labelcolor='white')
     ax2.yaxis.set_label_position('left')
     ax2.yaxis.set_major_formatter(ticker.FuncFormatter(lambda y, pos: '{:,.0f}'.format(y / 1)))
     ax2.yaxis.set_ticks_position('left')
 
     plt.xlim(0.5, day[len(day) - 1] + 0.5)
     plt.title(currency, fontdict=font)
-    fig.legend([ax1_plot, ax2_plot], ["Volume", "Count"], loc='lower center', ncol=2, frameon=False)
+    legend = fig.legend([ax1_plot, ax2_plot], ["Volume", "Count"], loc='lower center', ncol=2, frameon=False)
+    for text in legend.get_texts():
+        text.set_color("white")
     plt.savefig("other-currency-" + currency + ".png", dpi=300, transparent=True)
     # plt.show()
     plt.clf()
